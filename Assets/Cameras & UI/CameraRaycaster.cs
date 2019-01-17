@@ -22,6 +22,11 @@ public class CameraRaycaster : MonoBehaviour
         get { return m_layerHit; }
     }
 
+    // Delegate type
+    public delegate void OnLayerChange();
+    // Observer set
+    public OnLayerChange layerChangeObservers; 
+
     void Start()
     {
         viewCamera = Camera.main;
@@ -29,6 +34,10 @@ public class CameraRaycaster : MonoBehaviour
 
     void Update()
     {
+        Layer prevLayer = m_layerHit;
+
+        bool found = false;
+
         // Look for and return priority layer hit
         foreach (Layer layer in layerPriorities)
         {
@@ -37,13 +46,20 @@ public class CameraRaycaster : MonoBehaviour
             {
                 m_hit = hit.Value;
                 m_layerHit = layer;
-                return;
+                found = true;
+                break;
             }
         }
 
         // Otherwise return background hit
-        m_hit.distance = distanceToBackground;
-        m_layerHit = Layer.RaycastEndStop;
+        if (!found)
+        {
+            m_hit.distance = distanceToBackground;
+            m_layerHit = Layer.RaycastEndStop;
+        }
+
+        if (m_layerHit != prevLayer)
+            layerChangeObservers();
     }
 
     RaycastHit? RaycastForLayer(Layer layer)
@@ -51,11 +67,11 @@ public class CameraRaycaster : MonoBehaviour
         int layerMask = 1 << (int)layer; // See Unity docs for mask formation
         Ray ray = viewCamera.ScreenPointToRay(Input.mousePosition);
 
-        RaycastHit hit; // used as an out parameter
-        bool hasHit = Physics.Raycast(ray, out hit, distanceToBackground, layerMask);
+        RaycastHit _hit; // used as an out parameter
+        bool hasHit = Physics.Raycast(ray, out _hit, distanceToBackground, layerMask);
         if (hasHit)
         {
-            return hit;
+            return _hit;
         }
         return null;
     }

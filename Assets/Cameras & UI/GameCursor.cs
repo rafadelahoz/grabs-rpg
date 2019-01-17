@@ -15,11 +15,12 @@ public class GameCursor : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        raycaster = GetComponent<CameraRaycaster>();   
+        raycaster = GetComponent<CameraRaycaster>();
+        raycaster.layerChangeObservers += OnLayerChange;
     }
 
     // Update is called once per frame
-    void Update()
+    void OnLayerChange()
     {
         switch (raycaster.layerHit)
         {
