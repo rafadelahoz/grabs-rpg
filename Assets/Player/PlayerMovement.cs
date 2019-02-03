@@ -6,10 +6,12 @@ using UnityStandardAssets.Characters.ThirdPerson;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] float walkMoveStopRadius = 0.2f;
+    [SerializeField] float attackMoveStopRadius = 2f;
 
     ThirdPersonCharacter m_Character;   // A reference to the ThirdPersonCharacter on the object
     CameraRaycaster cameraRaycaster;
-    Vector3 currentClickTarget;
+    Vector3 currentDestination;
+    Vector3 clickedPoint;
 
     bool controlledByGamepad = false;
 
@@ -20,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
     {
         cameraRaycaster = Camera.main.GetComponent<CameraRaycaster>();
         m_Character = GetComponent<ThirdPersonCharacter>();
-        currentClickTarget = transform.position;
+        currentDestination = transform.position;
     }
 
     // Fixed update is called in sync with physics
@@ -30,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.G)) 
         {
             controlledByGamepad = !controlledByGamepad;
-            currentClickTarget = transform.position;
+            currentDestination = transform.position;
         }
 
         if (controlledByGamepad)
@@ -47,13 +49,14 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetMouseButton(0))
         {
+            clickedPoint = cameraRaycaster.hit.point;
             switch (cameraRaycaster.layerHit)
             {
                 case Layer.Walkable:
-                    currentClickTarget = cameraRaycaster.hit.point;
+                    currentDestination = ShortDestination(clickedPoint, walkMoveStopRadius);
                     break;
                 case Layer.Enemy:
-                    print("Not moving to enemy!");
+                    currentDestination = ShortDestination(clickedPoint, attackMoveStopRadius);
                     break;
                 default:
                     print("Unkwon destination?");
@@ -61,7 +64,12 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        Vector3 clickedDestination = currentClickTarget - transform.position;
+        WalkToDestination();
+    }
+
+    private void WalkToDestination()
+    {
+        Vector3 clickedDestination = currentDestination - transform.position;
         if (clickedDestination.magnitude >= walkMoveStopRadius)
         {
             m_Character.Move(clickedDestination, false, false);
@@ -81,6 +89,25 @@ public class PlayerMovement : MonoBehaviour
         movementVector = v * cameraForward + h * Camera.main.transform.right;
 
         m_Character.Move(movementVector, false, false);
+    }
+
+    private Vector3 ShortDestination(Vector3 destination, float shortening)
+    {
+        Vector3 reductionVector = (destination - transform.position).normalized * shortening;
+        return destination - reductionVector;
+    }
+
+    private void OnDrawGizmos()
+    {
+        // Some lines
+        Gizmos.color = Color.black;
+        Gizmos.DrawLine(transform.position, currentDestination);
+        Gizmos.DrawSphere(currentDestination, 0.1f);
+        Gizmos.DrawSphere(clickedPoint, 0.2f);
+
+        // Sphere?
+        Gizmos.color = new Color(1, 0, 0, 0.4f);
+        Gizmos.DrawWireSphere(transform.position, attackMoveStopRadius);
     }
 }
 

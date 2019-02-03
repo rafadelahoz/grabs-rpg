@@ -82,8 +82,8 @@ Material:
     - _Metallic: 0.094
     - _Mode: 0
     - _OcclusionStrength: 1
-    - _PHeight: 511
-    - _PWidth: 1175
+    - _PHeight: 480
+    - _PWidth: 640
     - _PXScale: 64
     - _PYScale: 36
     - _Parallax: 0.02

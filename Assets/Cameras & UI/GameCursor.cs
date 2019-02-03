@@ -16,13 +16,13 @@ public class GameCursor : MonoBehaviour
     void Start()
     {
         raycaster = GetComponent<CameraRaycaster>();
-        raycaster.layerChangeObservers += OnLayerChange;
+        raycaster.OnLayerChange += OnLayerChange;
     }
 
     // Update is called once per frame
-    void OnLayerChange()
+    void OnLayerChange(Layer newLayer)
     {
-        switch (raycaster.layerHit)
+        switch (newLayer)
         {
             case Layer.Enemy:
                 Cursor.SetCursor(attackCursor, cursorHotspot, CursorMode.Auto);
@@ -36,4 +36,6 @@ public class GameCursor : MonoBehaviour
         }
 
     }
+
+    // TODO: Remember to de-register this from the LayerChangeObservers on destroy
 }

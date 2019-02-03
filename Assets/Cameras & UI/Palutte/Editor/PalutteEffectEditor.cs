@@ -13,7 +13,7 @@ public class PalutteEffectEditor : Editor {
 		
 
 		//Palutte material
-		effect.material = (Material)EditorGUILayout.ObjectField("Material:", effect.material, typeof(Material));
+		effect.material = (Material)EditorGUILayout.ObjectField("Material:", effect.material, typeof(Material), true);
 
 		//LUT texture
 		EditorGUILayout.BeginHorizontal();
