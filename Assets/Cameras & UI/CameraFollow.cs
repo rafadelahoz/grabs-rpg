@@ -17,6 +17,14 @@ public class CameraFollow : MonoBehaviour
         if (!player)
             return;
 
-        transform.position = Vector3.Lerp(transform.position, player.transform.position, 0.6f);
+        float exp_taylor3(float x)
+        {
+            return 1.0f + x + x * x * 0.5f + x * x * x / 6.0f;
+        }
+
+        float timeHorizon = 0.018f;
+        float expDenominator = exp_taylor3(Time.deltaTime / timeHorizon);
+        Vector3 target = player.transform.position;
+        transform.position = target + (transform.position - target) / expDenominator;
     }
 }
