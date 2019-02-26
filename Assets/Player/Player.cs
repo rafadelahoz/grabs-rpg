@@ -12,7 +12,6 @@ public class Player : MonoBehaviour
     {
         get
         {
-            print((hp / maxHP));
             return (hp/maxHP);
         }
     }
