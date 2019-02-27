@@ -1,21 +1,67 @@
 fileFormatVersion: 2
-guid: 6e51da3d48f4247a0a05abe4b968ed42
+guid: f30fc7289ce104949a16cd9badd9158f
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: //RootNode
-    400000: //RootNode
-    2100000: Cloth__Palette_NTSC_png
+    100000: arm,r
+    100002: arm.l
+    100004: Armature
+    100006: Cube
+    100008: femur.l
+    100010: femur.r
+    100012: foot.l
+    100014: foot.l_end
+    100016: foot.r
+    100018: foot.r_end
+    100020: forearm.l
+    100022: forearm.l_end
+    100024: forearm.r
+    100026: forearm.r_end
+    100028: Head
+    100030: Head_end
+    100032: hip.l
+    100034: hip.r
+    100036: leg.l
+    100038: leg.r
+    100040: Spine
+    100042: Spine.001
+    100044: //RootNode
+    400000: arm,r
+    400002: arm.l
+    400004: Armature
+    400006: Cube
+    400008: femur.l
+    400010: femur.r
+    400012: foot.l
+    400014: foot.l_end
+    400016: foot.r
+    400018: foot.r_end
+    400020: forearm.l
+    400022: forearm.l_end
+    400024: forearm.r
+    400026: forearm.r_end
+    400028: Head
+    400030: Head_end
+    400032: hip.l
+    400034: hip.r
+    400036: leg.l
+    400038: leg.r
+    400040: Spine
+    400042: Spine.001
+    400044: //RootNode
+    2100000: Cloth
     2100002: Dark
     2100004: Beak
-    2100006: Eye__eye
-    2300000: //RootNode
-    3300000: //RootNode
+    2100006: Eye
     4300000: Cube
-    7400000: Default Take
     9500000: //RootNode
-    2186277476908879412: ImportLogs
-  externalObjects: {}
+    13700000: Cube
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Eye
+    second: {fileID: 2100000, guid: 780eebbf539cc4adfaee31de8aa81317, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -67,7 +113,7 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 1
+    previousCalculatedGlobalScale: 0.01
     hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60

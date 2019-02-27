@@ -1,10 +1,48 @@
 fileFormatVersion: 2
-guid: 6e51da3d48f4247a0a05abe4b968ed42
+guid: 4251674ea801e4643b421bb83f8cf947
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
+    100002: arm_l
+    100004: arm_r
+    100006: Armature
+    100008: Cube
+    100010: femur_l
+    100012: femur_r
+    100014: foot_l
+    100016: foot_r
+    100018: forearm_l
+    100020: forearm_r
+    100022: Head
+    100024: hip_l
+    100026: hip_r
+    100028: leg_l
+    100030: leg_r
+    100032: Spine
+    100034: Spine_001
+    100036: Spine_L
+    100038: Spine_R
     400000: //RootNode
+    400002: arm_l
+    400004: arm_r
+    400006: Armature
+    400008: Cube
+    400010: femur_l
+    400012: femur_r
+    400014: foot_l
+    400016: foot_r
+    400018: forearm_l
+    400020: forearm_r
+    400022: Head
+    400024: hip_l
+    400026: hip_r
+    400028: leg_l
+    400030: leg_r
+    400032: Spine
+    400034: Spine_001
+    400036: Spine_L
+    400038: Spine_R
     2100000: Cloth__Palette_NTSC_png
     2100002: Dark
     2100004: Beak
@@ -13,8 +51,10 @@ ModelImporter:
     3300000: //RootNode
     4300000: Cube
     7400000: Default Take
+    7400002: Idle
+    7400004: Run
     9500000: //RootNode
-    2186277476908879412: ImportLogs
+    13700000: Cube
   externalObjects: {}
   materials:
     importMaterials: 1
