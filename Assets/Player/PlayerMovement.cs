@@ -18,6 +18,8 @@ public class PlayerMovement : MonoBehaviour
     Vector3 cameraForward;
     Vector3 movementVector;
 
+    [SerializeField] Animator birbAnimator;
+
     private void Start()
     {
         cameraRaycaster = Camera.main.GetComponent<CameraRaycaster>();
@@ -78,6 +80,11 @@ public class PlayerMovement : MonoBehaviour
         {
             m_Character.Move(Vector3.zero, false, false);
         }
+
+        if (clickedDestination.magnitude < 0.1f)
+            birbAnimator.Play("Idle");
+        else
+            birbAnimator.Play("Run");
     }
 
     private void HandleDirectMovement()
@@ -89,6 +96,11 @@ public class PlayerMovement : MonoBehaviour
         movementVector = v * cameraForward + h * Camera.main.transform.right;
 
         m_Character.Move(movementVector, false, false);
+
+        if (movementVector.magnitude < 0.1f)
+            birbAnimator.Play("Idle");
+        else
+            birbAnimator.Play("Run");
     }
 
     private Vector3 ShortDestination(Vector3 destination, float shortening)
